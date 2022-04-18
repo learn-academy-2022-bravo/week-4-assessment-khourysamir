@@ -42,16 +42,21 @@ describe('contentShuffler', () => {
 // Pseudocode:
 // create a function named contentShuffler
 // remove the first value in the array using .shift
-// use Math.floor and Math.random to shuffle and return
+// use Math.random and sort function from the new array that was created with a key value of sort to shuffle 
 
 const contentShuffler = (array) => {
     array.shift()
-    for (i = 0; i < array.length; i++) {
-        let random = Math.floor(Math.random() * array.length)
     return array
-    }
+      .map(value => ({value, sort: Math.random() }))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({value}) => value)
 }
+
+// console.log(contentShuffler(colors1));
+// console.log(contentShuffler(colors2));
 // output:
+// [ 'pink', 'green', 'blue', 'yellow' ]
+// [ 'saffron', 'indigo', 'ochre', 'periwinkle', 'aquamarine' ]
 // PASS  ./code-challenges.test.js
 // contentShuffler
 //   ✓ takes in an array, removes the first item from the array and shuffles the remaining content. (1 ms)
@@ -112,7 +117,6 @@ const minMax = (array) => {
 describe('noDups', () => {
     it("takes in two arrays as arguments and returns one array with no duplicate values.", () => {
          expect(noDups(testArray1, testArray2)).toEqual([3, 7, 10, 5, 4, 8, 2, 1])
-
     })
 })
 
@@ -133,6 +137,7 @@ const testArray2 = [7, 8, 2, 3, 1, 5, 4]
 //create a function named noDups
 //pass in two arrays in the function
 //use set to remove duplicates and a spread operator to create a new array
+
 const noDups = (array1, array2) => {
     return [...new Set([...array1, ...array2])];
 }
